@@ -1,0 +1,170 @@
+{
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "compose dev dependencies",
+        "detail": "instal dev cert and dependency containers",
+        "command": "pwsh .\\env\\init_dev_env.ps1",
+        "type": "shell",
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "none",
+        "runOptions": {
+          "instanceLimit": 1
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "dev reverse proxy",
+        "command": "pwsh .\\dev_proxy.ps1",
+        "type": "shell",
+        "runOptions": {
+          "instanceLimit": 1
+        },
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "none",
+        "problemMatcher": []
+      },
+      {
+        "label": "full dev setup",
+        "command": "pwsh .\\start_containers.ps1",
+        "type": "shell",
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "none",
+        "problemMatcher": []
+      },
+      {
+        "label": "build and compose all",
+        "command": "docker-compose up -d ${input:build}",
+        "type": "shell",
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "test all",
+        "command": "npm run test",
+        "type": "shell",
+        "presentation": {
+          "reveal": "always"
+        },
+        "group": "test",
+        "problemMatcher": []
+      },
+      {
+        "label": "migrate up",
+        "type": "shell",
+        "command": "npx",
+        "args": [
+          "migrate",
+          "up"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder:apps/api}"
+        },
+        "problemMatcher": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "build",
+        "type": "pickString",
+        "description": "Do you want to add --build?",
+        "options": [
+          "",
+          "--build"
+        ],
+        "default": ""
+      },
+      {
+        "id": "confirm",
+        "type": "pickString",
+        "description": "This script have pre-conditions to run. Please confirm the comments in front of it before executing. continue?",
+        "options": [
+          "y",
+          "n"
+        ],
+        "default": "n"
+      }
+    ]
+  },
+  "folders": [
+    {
+      "name": "geex",
+      "path": "./"
+    },
+    {
+      "name": "server/modules",
+      "path": "./server/modules"
+    },
+    {
+      "name": "server/gateway",
+      "path": "./server/gateway"
+    },
+    {
+      "name": "client/platform",
+      "path": "./client/platform"
+    },
+    {
+      "name": "client/chatgpt",
+      "path": "./client/chatgpt"
+    },
+    {
+      "name": "client/landing",
+      "path": "./client/landing"
+    },
+    {
+      "name": "libs/core",
+      "path": "./libs/core"
+    },
+    {
+      "name": "libs/nest",
+      "path": "./libs/nest"
+    },
+    {
+      "name": "libs/angular",
+      "path": "./libs/angular"
+    },
+    {
+      "name": "libs/react",
+      "path": "./libs/react"
+    }
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": [
+      "ROOT",
+    ],
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#f83184",
+      "titleBar.activeBackground": "#f83184",
+      "titleBar.activeForeground": "#FFFBFD"
+    },
+    "cSpell.enableFiletypes": [
+      "*"
+    ],
+    "vsicons.presets.nestjs": true,
+    "restoreTerminals.runOnStartup": true,
+    "restoreTerminals.keepExistingTerminalsOpen": true,
+  },
+  "extensions": {
+    "recommendations": [
+      "orta.vscode-jest",
+      "nguyenngoclong.terminal-keeper",
+      "streetsidesoftware.code-spell-checker",
+      "mikestead.dotenv",
+      "me-dutour-mathieu.vscode-github-actions",
+      "fi3ework.vscode-antd-rush",
+      "aaron-bond.better-comments",
+      "ms-azuretools.vscode-docker",
+      "github.vscode-github-actions"
+    ],
+  }
+}

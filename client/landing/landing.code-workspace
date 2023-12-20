@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+  ],
+  "settings": {
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "files.associations": {
+      "*.json": "jsonc",
+      ".prettierrc": "jsonc",
+      ".stylelintrc": "jsonc"
+    },
+    "vsicons.presets.angular": true,
+    "vscode-i18n-linter.langPrefix": "src/app/core/i18n/zh-CN/",
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#37517e",
+      "titleBar.activeBackground": "#37517e",
+      "titleBar.activeForeground": "#FCFCFF"
+    }
+  }
+}

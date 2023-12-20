@@ -57,5 +57,6 @@
     "activityBar.background": "#37517e",
     "titleBar.activeBackground": "#37517e",
     "titleBar.activeForeground": "#FCFCFF"
-}
+},
+"files.exclude": {}
 }

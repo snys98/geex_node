@@ -1,0 +1,74 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.2.6",
+  "deps": {},
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "nest": [
+        {
+          "file": ".eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "README.md",
+          "hash": "12672066526209607406"
+        },
+        {
+          "file": "jest.config.ts",
+          "hash": "16032178457546166089"
+        },
+        {
+          "file": "project.json",
+          "hash": "7487425843100882609"
+        },
+        {
+          "file": "src/index.ts",
+          "hash": "8719636281542815273"
+        },
+        {
+          "file": "src/lib/exception-filter/exception-filter.module.ts",
+          "hash": "10690642609860669759"
+        },
+        {
+          "file": "src/lib/exception-filter/user-friendly-exception.filter.ts",
+          "hash": "12985731984190945070"
+        },
+        {
+          "file": "src/lib/logging/logging.interceptor.ts",
+          "hash": "3501452230526817671"
+        },
+        {
+          "file": "src/lib/logging/logging.module.ts",
+          "hash": "950498559755850151"
+        },
+        {
+          "file": "src/lib/logging/logging.service.spec.ts",
+          "hash": "4882628098233003650"
+        },
+        {
+          "file": "src/lib/logging/logging.service.ts",
+          "hash": "11898638635247581583"
+        },
+        {
+          "file": "src/lib/shared.module.ts",
+          "hash": "17207669352698094614"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "5840880287502376438"
+        },
+        {
+          "file": "tsconfig.lib.json",
+          "hash": "3550173832616418300"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}

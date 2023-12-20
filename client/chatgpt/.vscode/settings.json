@@ -2,8 +2,8 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "[markdown]": {
     "editor.formatOnSave": false
@@ -57,5 +57,6 @@
     "activityBar.background": "#357962",
     "titleBar.activeBackground": "#357962",
     "titleBar.activeForeground": "#F9FAFC"
-  }
+  },
+  "files.exclude": {}
 }
