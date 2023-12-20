@@ -1,0 +1,133 @@
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css">
+
+<nz-card *ngVar="chatState.observable | async as state"
+         [nzTitle]="state.activeChatId"
+         [nzExtra]="extraTemplate"
+         style="background: transparent; height: 100%;">
+  <ng-template #extraTemplate>
+    <nz-switch [(ngModel)]="this.viewText"
+               nzCheckedChildren="ShowText"
+               nzUnCheckedChildren="HideText"></nz-switch>
+    <nz-switch [ngModel]="false"
+               [nzDisabled]="true"
+               nzCheckedChildren="ShowTranslation"
+               nzUnCheckedChildren="HideTranslation"></nz-switch>
+
+  </ng-template>
+  <div class="content"
+       #scrollableDiv
+       (scroll)="onScroll($event)">
+    <ng-container *ngIf="state.messages.length > 0; else elseTemplate">
+      <ng-container *ngFor="let item of state.messages">
+        <ng-container *ngIf="!item.isHidden">
+          <ng-container *ngIf="item.chatMessageRole == chatMessageRole.Assistant">
+            <ng-container>
+              <div nz-row
+                   class="mt-md message">
+                <div nz-col
+                     nzSpan="1"
+                     style="text-align: center;">
+                  <nz-avatar nzIcon="user"
+                             nzSrc="../../../../assets/ai-avatar-chat-white.png"></nz-avatar>
+                </div>
+                <div nz-col
+                     nzSpan="23">
+                  <p class="text-xs text-left">{{ item.createdOn | date:"yyyy-MM-dd HH:mm:ss" }}</p>
+                  <div class="message-content message-left">
+                    <markdown *ngIf="this.viewText; else elseTemplate"
+                              clipboard>
+                      {{ item.text }}
+                    </markdown>
+                    <ng-template #elseTemplate>
+                      <div>&nbsp;</div>
+                    </ng-template>
+                    <audio *ngIf="item.audio?.url"
+                           controls
+                           [src]="item.audio?.url"></audio>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="item.chatMessageRole == chatMessageRole.User">
+            <ng-container>
+              <div nz-row
+                   class="mt-md message">
+                <div nz-col
+                     nzSpan="23">
+                  <p class="text-xs text-right">{{ item.createdOn | date:"yyyy-MM-dd HH:mm:ss" }}</p>
+                  <div class="message-content message-right">
+                    <markdown *ngIf="this.viewText; else elseTemplate"
+                              clipboard>
+                      {{ item.text }}
+                    </markdown>
+                    <ng-template #elseTemplate>
+                      <div>&nbsp;</div>
+                    </ng-template>
+                    <audio *ngIf="item.audio?.url"
+                           controls
+                           [src]="item.audio?.url"></audio>
+                  </div>
+                </div>
+                <div nz-col
+                     nzSpan="1"
+                     style="text-align: center;">
+                  <nz-avatar nzText="U"
+                             class="message-avatar"></nz-avatar>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="empty-panel">
+        <h1 class="empty-panel-title">Geex ChatGPT</h1>
+        <div nz-row
+             [nzGutter]="16">
+          <div nz-col
+               [nzSpan]="6"
+               *ngFor="let item of array">
+            <div class="empty-panel-box"
+                 (click)="quickChat(item,'New Teacher')">{{ item }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="send"
+       nz-row
+       *ngIf="chatState.snapshot.activeChatId">
+    <button nz-button
+            nzSize="large"
+            nzType="primary"
+            nzShape="circle"
+            (click)="handleRecordButtonClick()">
+      <span nz-icon
+            nzType="audio"
+            nzTheme="outline"></span>
+    </button>
+    <nz-card class="send-input">
+      <div *ngIf="activeChat$ | async as activeChat">{{activeChat.status}}</div>
+      <textarea rows="4"
+                placeholder="问我任何问题... (Shift + Enter 换行，按下 Enter 发送)"
+                nz-input
+                [(ngModel)]="text"
+                (keypress)="handleKeyPress($event)"></textarea>
+    </nz-card>
+    <button nz-button
+            nzSize="large"
+            nzType="primary"
+            nzShape="circle"
+            (click)="handleSendButtonClick()">
+      <span nz-icon
+            nzType="send"
+            nzTheme="outline"></span>
+    </button>
+
+  </div>
+
+</nz-card>

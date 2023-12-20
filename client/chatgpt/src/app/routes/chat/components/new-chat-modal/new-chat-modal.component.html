@@ -1,0 +1,34 @@
+<nz-form [formGroup]="createForm"
+         nzLayout="vertical">
+<nz-form-item>
+  <nz-form-label nzRequired>Title</nz-form-label>
+  <nz-form-control>
+    <input nz-input
+           [formControl]="createForm.controls.title"
+           required />
+  </nz-form-control>
+</nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Model</nz-form-label>
+    <nz-form-control>
+      <nz-select [formControl]="createForm.controls.aiModel"
+                 required>
+        <nz-option *ngFor="let character of AiModel | keyvalue"
+                   [nzLabel]="character.key"
+                   [nzValue]="character.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+<nz-form-item>
+  <nz-form-label nzRequired>CourseWare</nz-form-label>
+  <nz-form-control>
+    <nz-select [formControl]="createForm.controls.chatMaterial"
+               required>
+      <nz-option *ngFor="let character of ChatMaterial | keyvalue"
+                 [nzLabel]="character.key"
+                 [nzValue]="character.value"></nz-option>
+    </nz-select>
+  </nz-form-control>
+</nz-form-item>
+</nz-form>

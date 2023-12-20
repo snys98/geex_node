@@ -1,0 +1,5 @@
+<nz-card style="background: transparent; border-left: 0px; border-right: 0px; border-bottom: 0px; border-top: 1px solid rgb(37, 39, 45);"
+         *ngVar="chatState.snapshot?.quota as quota">
+  <p>余额: {{quota?.remainingUnits}}({{quota?.remainingUnits/quota.totalUnits|percent}})</p>
+  <p>已使用:<nz-progress [nzPercent]="(1-quota?.remainingUnits/quota.totalUnits)*100 | number:'1.2-2'"></nz-progress></p>
+</nz-card>

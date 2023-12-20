@@ -1,0 +1,112 @@
+<div class="box-right">
+  <div class="login">
+    <div class="head"
+         *ngIf="isMobile;else pc">
+      <img src="/assets/imgs/geex.ico"
+           alt=""
+           width="26">&nbsp;<h1>Geex ChatGPT</h1>
+    </div>
+    <ng-template #pc>
+      <h1 style="color: rgb(255, 255, 255);">Geex ChatGPT</h1>
+    </ng-template>
+    <div class="login-box">
+
+      <form nz-form
+            [formGroup]="form"
+            (ngSubmit)="submit()"
+            role="form"
+            #loginForm="ngForm">
+        <!-- 账号 -->
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="user"
+                            nzSize="large" class="gx-input-group">
+              <input nz-input
+                     formControlName="userName"
+                     placeholder="用户名或邮箱地址"
+                     required
+                     maxlength="255" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- 密码 -->
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock"
+                            nzSize="large" class="gx-input-group">
+              <input nz-input
+                     nzSize="large"
+                     formControlName="password"
+                     name="password"
+                     placeholder="密码"
+                     type="password"
+                     required
+                     maxlength="32" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- 验证码 OLD-->
+        <nz-form-item>
+          <nz-form-control>
+            <div nz-row>
+              <nz-col [nzSpan]="12">
+                <nz-input-group nzPrefixIcon="picture"
+                                nzSize="large" class="gx-input-group">
+                  <input nz-input
+                         nzSize="large"
+                         name="verificationCode"
+                         placeholder="验证码"
+                         type="text"
+                         (click)="initImg()"
+                         (keyup)="onKey($event)"
+                         maxlength="32">
+                </nz-input-group>
+
+              </nz-col>
+              <nz-col [nzSpan]="12"
+                      class="text-right">
+                <img (click)="clearimg()"
+                     [src]="verificationImgUrl">
+              </nz-col>
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- 登陆按钮 -->
+        <button nz-button
+                [nzType]="'primary'"
+                [nzLoading]="submitting"
+                nzSize="large"
+                class="yoyo__block"
+                [disabled]="!loginForm.form.valid || submitting">
+<!--           <i nz-icon
+             nzType="login" ></i>
+          <span>登录</span> -->
+  <span nz-icon
+        [nzType]="'login'"
+        class="login_icon"></span>
+  <span>登录</span>
+
+        </button>
+        <!-- 记住我 -->
+        <nz-form-item style="margin-top: 20px;">
+          <nz-col [nzSpan]="12"
+                  class="text-left">
+            <label nz-checkbox
+                   name="rememberMe">
+              <span>记住我</span>
+            </label>
+          </nz-col>
+
+          <nz-col [nzSpan]="12"
+                  class="text-right">
+            <a (click)="msg.error('暂不支持')"
+               class="forgot forget-password">忘记密码</a>
+          </nz-col>
+        </nz-form-item>
+      </form>
+
+
+    </div>
+  </div>
+</div>

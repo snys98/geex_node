@@ -1,0 +1,30 @@
+{
+  "production": true,
+  "useHash": false,
+  "appUrl": "https://chatgpt.geexbox.tech",
+  "enableWatermarking": false,
+  "api": {
+    "baseUrl": "https://platform.api.geexbox.tech",
+    "refreshTokenEnabled": false,
+    "refreshTokenType": "auth-refresh"
+  },
+  "auth": {
+    "geex": {
+      "issuer": "https://platform.api.geexbox.tech/",
+      "loginUrl": "https://platform.api.geexbox.tech/idsvr/authorize",
+      "redirectUri": "https://chatgpt.geexbox.tech",
+      "userinfoEndpoint": "https://platform.api.geexbox.tech/idsvr/userinfo",
+      "clientId": "chatgpt",
+      "dummyClientSecret": "chatgpt",
+      "responseType": "code",
+      "scope": "openid profile",
+      "logoutUrl": "https://platform.api.geexbox.tech/idsvr/endsession",
+      "sessionCheckIFrameUrl": "https://platform.api.geexbox.tech/idsvr/checksession",
+      "sessionChecksEnabled": true,
+      "silentRefreshTimeout": 3000
+    }
+  },
+  "connectedClients": {
+    "app": "https://app.geexbox.tech"
+  }
+}

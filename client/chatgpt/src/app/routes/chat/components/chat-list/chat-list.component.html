@@ -1,0 +1,14 @@
+<div class="chat-list">
+
+  <ng-container *ngFor="let item of chatState.snapshot.chatList">
+    <app-chat-item [chatValue]="item"
+                   [action]="chatState.snapshot.activeChatId == item.id"
+                   (chatClick)="onChatClick(item.id)"
+                   (chatDelete)="onDeleteClick(item.id)">
+    </app-chat-item>
+  </ng-container>
+
+
+
+
+</div>

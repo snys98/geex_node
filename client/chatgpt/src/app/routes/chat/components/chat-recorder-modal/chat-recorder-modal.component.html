@@ -1,0 +1,25 @@
+<div class="voice-container">
+  <nz-result [nzIcon]="audio">
+    <div nz-result-extra
+         style="margin-bottom: -48px;">
+      <button nz-button
+              [disabled]="isRecording"
+              (click)="startRecognition()"
+              nzType="primary">开始录制</button>
+      <button nz-button
+              [disabled]="!isRecording"
+              (click)="stopRecognition()">停止录制</button>
+      <textarea rows="4"
+                style="margin-top: 12px;"
+                nz-input
+                [(ngModel)]="recognizedText"></textarea>
+    </div>
+  </nz-result>
+  <ng-template #audio>
+    <span nz-icon
+          [ngClass]="{'blinking': isRecording}"
+          nzType="audio"
+          nzTheme="outline"></span>
+  </ng-template>
+
+</div>

@@ -1,0 +1,82 @@
+fragment ChatMessageBrief on ChatMessage {
+  id
+  text
+  audio {
+    id
+    url
+  }
+  chatMessageRole
+  isHidden
+  createdOn
+}
+
+fragment ChatBrief on Chat {
+  id
+  sessionToken
+  aiModel
+  title
+  status
+}
+
+fragment ChatDetail on Chat {
+  ...ChatBrief
+  messages {
+    ...ChatMessageBrief
+  }
+}
+
+query chats {
+  chats {
+    items {
+      ...ChatBrief
+    }
+  }
+}
+
+query chatById($chatId: String!) {
+  chatById(id: $chatId) {
+    ...ChatDetail
+  }
+}
+
+mutation createChat($aiModel: AiModel!, $sessionToken: String!, $title: String!, $chatMaterial: ChatMaterial) {
+  createChat(input: { aiModel: $aiModel, sessionToken: $sessionToken, title: $title, chatMaterial: $chatMaterial }) {
+    ...ChatBrief
+  }
+}
+mutation deleteChat($chatId: String!) {
+  deleteChat(ids: [$chatId])
+}
+
+mutation sendMediaMessage($chatId: String!, $input: MediaMessageInput!) {
+  sendMediaMessage(chatId: $chatId, messageInput: $input)
+}
+
+mutation sendTextMessage($chatId: String!, $text: String!) {
+  sendTextMessage(chatId: $chatId, text: $text)
+}
+
+subscription onNewMessage($chatId: String!) {
+  onNewMessage(chatId: $chatId) {
+    ...ChatMessageBrief
+  }
+}
+
+subscription onNewAudio($chatId: String!) {
+  onNewAudio(chatId: $chatId)
+}
+
+query myQuota {
+  myQuota {
+    ...quota
+  }
+}
+
+fragment quota on Quota {
+  id
+  userId
+  totalUnits
+  utilizedUnits
+  remainingUnits
+  lastRefreshTime
+}

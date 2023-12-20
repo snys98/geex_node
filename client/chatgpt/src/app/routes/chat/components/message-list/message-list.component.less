@@ -1,0 +1,140 @@
+::ng-deep .ant-card {
+  border: 0px;
+}
+
+::ng-deep .ant-card-head {
+  border-bottom: 0.666667px solid rgb(37, 39, 45);
+  border-left  : 0px;
+  border-right : 0px;
+  border-top   : 0px;
+}
+
+::ng-deep .ant-card-body {
+  height  : calc(100% - 56px);
+  border  : 0px;
+  position: relative;
+}
+
+audio {
+  min-width: 300px;
+
+  &::-webkit-media-controls-enclosure {
+    background: border-box;
+  }
+}
+
+.content {
+  height    : calc(100% - 107px);
+  box-sizing: border-box;
+  max-height: calc(100% - 107px);
+  overflow-y: auto;
+  position  : absolute;
+  top       : 0;
+  left      : 0;
+  right     : 0;
+}
+
+.empty-panel {
+  margin-left : 25%;
+  margin-right: 25%;
+}
+
+.empty-panel-title {
+  color     : rgba(255, 255, 255, 0.82);
+  text-align: center;
+  padding   : 10%;
+}
+
+.empty-panel-box {
+  margin-top      : 16px;
+  height          : 55px;
+  line-height     : 55px;
+  background-color: rgb(23, 23, 23);
+  color           : rgba(255, 255, 255, 0.82);
+  text-align      : center;
+}
+
+.message {
+  text-align   : end;
+  margin-bottom: 12px;
+}
+
+.message-avatar {
+  color           : #f56a00;
+  background-color: #fde3cf;
+}
+
+.message-content {
+  box-sizing     : border-box;
+  border-width   : 0;
+  border-style   : solid;
+  border-color   : #e5e7eb;
+  color          : rgb(0, 0, 0);
+  border-radius  : 0.375rem;
+  text-align     : initial;
+  padding        : 8px 12px 8px 12px;
+  width          : 90%;
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+}
+
+.message-right {
+  float           : right;
+  background-color: rgb(134, 223, 186);
+}
+
+.message-left {
+  float           : left;
+  background-color: #444;
+  color           : rgb(201, 209, 217);
+}
+
+.send {
+  top           : calc(100% - 96px);
+  height        : 100px;
+  left          : 10px;
+  right         : 10px;
+  position      : absolute;
+  border-radius : 2px;
+  display       : flex;
+  flex-direction: row;
+  flex-wrap     : nowrap;
+  align-items   : center;
+}
+
+.send-input:focus {
+  background-color: rgba(99, 226, 183, 0.1);
+}
+
+.send-input {
+  background-color     : rgba(255, 255, 255, 0.1);
+  text-decoration-color: rgb(148 13 13 / 82%);
+  color                : rgba(255, 255, 255, 0.38);
+  border               : rgba(255, 255, 255, 0.38);
+  outline-color        : rgba(255, 255, 255, 0.38);
+  caret-color          : rgb(99, 226, 183);
+  resize               : none;
+  margin-left          : 10px;
+  margin-right         : 10px;
+  flex: 1;
+}
+
+::ng-deep code {
+  background-color: #282c34;
+  border          : 1px solid #282c34;
+}
+
+::ng-deep pre {
+  background-color: #282c34;
+  border          : 1px solid #282c34;
+}
+
+/* Copy按钮样式 */
+::ng-deep .markdown-clipboard-button {
+  border          : none;
+  background-color: transparent;
+  padding         : 0;
+  margin          : 0;
+  cursor          : pointer;
+}

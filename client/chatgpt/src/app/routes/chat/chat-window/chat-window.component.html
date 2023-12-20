@@ -1,0 +1,41 @@
+<div nz-row
+     style="background-color: rgb(24, 24, 28);height: 100%">
+
+  <div nz-col
+       nzSpan="4"
+       style=" border-right: 1px solid rgb(37, 39, 45);">
+
+
+    <div nz-row
+         [nzGutter]="8"
+         class="search">
+      <div nz-col
+           nzSpan="21"><input type="text"
+               nz-input
+               class="search-input"
+               placeholder="过滤" /></div>
+      <div nz-col
+           nzSpan="3"><button nz-button
+                nzType="primary"
+                nzSearch><span nz-icon
+                class="search-icon"
+                nzType="plus"
+                (click)="startNewSession()"
+                nzTheme="outline"></span></button></div>
+    </div>
+
+    <app-chat-list></app-chat-list>
+    <app-chat-quota></app-chat-quota>
+  </div>
+
+
+  <div nz-col
+       style="background-color: rgb(17, 17, 20)"
+       nzSpan="20">
+
+    <app-message-list></app-message-list>
+
+
+  </div>
+
+</div>

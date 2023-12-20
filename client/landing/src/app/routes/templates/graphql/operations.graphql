@@ -1,0 +1,13 @@
+mutation generateTemplate($template: Template!, $args: TemplateArgsInput!) {
+  generateTemplate(
+    template: $template
+    args: $args # args: { schematicsTemplate: { aggregateManageUIModule: { module: "templates", aggregateName: "template" } } }
+  ) {
+    fileName
+    md5
+    fileSize
+    mimeType
+    storageType
+    url
+  }
+}
