@@ -1,5 +1,5 @@
 {
-  "name": "@geex/core",
+  "name": "core",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
@@ -13,10 +13,6 @@
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": ["libs/core/*.md"]
       }
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs @geex/core {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",

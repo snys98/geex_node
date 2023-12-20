@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@geex/core": ["libs/core/src/index.ts"]
+      "angular": ["libs/angular/src/index.ts"],
+      "auth": ["server/modules/auth/src/index.ts"],
+      "core": ["libs/core/src/index.ts"],
+      "nest": ["libs/nest/src/index.ts"],
+      "react": ["libs/react/src/index.ts"],
+      "user": ["server/modules/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
