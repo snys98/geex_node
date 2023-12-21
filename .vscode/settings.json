@@ -1,8 +1,8 @@
 {
   "files.exclude": {
-    "libs": true,
     "client": true,
-    "server": true
+    "server": true,
+    "libs": true
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#362B20",

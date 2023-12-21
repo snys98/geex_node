@@ -1,7 +1,7 @@
 import { Catch, HttpException } from "@nestjs/common";
 import { GqlExceptionFilter, GqlArgumentsHost } from "@nestjs/graphql";
 import { ArgumentsHost } from "@nestjs/common/interfaces";
-import { LoggingService } from "@shared/logging/logging.service";
+import { LoggingService } from "@geex/nest/logging/logging.service";
 
 @Catch()
 export class UserFriendlyExceptionFilter implements GqlExceptionFilter {

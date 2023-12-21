@@ -98,44 +98,24 @@
   },
   "folders": [
     {
-      "name": "geex",
-      "path": "./"
+      "name": "✨ geex",
+      "path": "."
     },
     {
       "name": "server/modules",
-      "path": "./server/modules"
+      "path": "server/modules"
     },
     {
       "name": "server/gateway",
-      "path": "./server/gateway"
-    },
-    {
-      "name": "client/platform",
-      "path": "./client/platform"
-    },
-    {
-      "name": "client/chatgpt",
-      "path": "./client/chatgpt"
-    },
-    {
-      "name": "client/landing",
-      "path": "./client/landing"
+      "path": "server/gateway"
     },
     {
       "name": "libs/core",
-      "path": "./libs/core"
+      "path": "libs/core"
     },
     {
       "name": "libs/nest",
-      "path": "./libs/nest"
-    },
-    {
-      "name": "libs/angular",
-      "path": "./libs/angular"
-    },
-    {
-      "name": "libs/react",
-      "path": "./libs/react"
+      "path": "libs/nest"
     }
   ],
   "settings": {

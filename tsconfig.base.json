@@ -15,12 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "angular": ["libs/angular/src/index.ts"],
-      "auth": ["server/modules/auth/src/index.ts"],
-      "core": ["libs/core/src/index.ts"],
-      "nest": ["libs/nest/src/index.ts"],
-      "react": ["libs/react/src/index.ts"],
-      "user": ["server/modules/user/src/index.ts"]
+      "@geex/angular": ["libs/angular/src/index.ts"],
+      "@geex/auth": ["server/modules/auth/src/index.ts"],
+      "@geex/core": ["libs/core/src/index.ts"],
+      "@geex/nest": ["libs/nest/src/index.ts"],
+      "@geex/react": ["libs/react/src/index.ts"],
+      "@geex/user": ["server/modules/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
