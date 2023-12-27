@@ -8,19 +8,19 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "allowJs": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2020"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@geex/angular": ["libs/angular/src/index.ts"],
-      "@geex/auth": ["server/modules/auth/src/index.ts"],
+      "@geex/modules": ["server/modules/modules/src/index.ts"],
       "@geex/core": ["libs/core/src/index.ts"],
       "@geex/nest": ["libs/nest/src/index.ts"],
       "@geex/react": ["libs/react/src/index.ts"],
-      "@geex/user": ["server/modules/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

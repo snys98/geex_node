@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { UserFriendlyExceptionFilter } from './user-friendly-exception.filter';
 import { ModuleRef } from '@nestjs/core';
-import { LoggingService } from '@shared/logging/logging.service';
+import { Logger } from '../logging';
 
 @Module({
     providers: [UserFriendlyExceptionFilter, {
-        provide: LoggingService,
+        provide: Logger,
         useFactory: (moduleRef: ModuleRef) => {
-            return moduleRef.get(LoggingService);
+            return moduleRef.get(Logger);
         },
         inject: [ModuleRef],
     }]

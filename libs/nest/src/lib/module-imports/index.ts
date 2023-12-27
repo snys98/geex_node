@@ -5,30 +5,21 @@ import { TerminusModule } from '@nestjs/terminus';
 import { RedisHealthModule } from '@songkeys/nestjs-redis-health';
 
 import { GeexConfig } from '../geex.config';
-import { createLoggerModule } from './logger-module';
-import { createMongooseModule } from './mongoose-module';
-import { createCacheModule } from './redis-module';
+import { GeexLoggerModule } from './logger.module';
+import { GeexCacheModule } from './redis.module';
+import { GeexTypegooseModule } from './typegoose.module';
+import { GeexPassportModule } from './passport.module';
+import { GeexJwtModule } from './jwt.module';
 
-export function createRootModules(config: GeexConfig) {
-    return [
-        HttpModule,
-        TerminusModule,
-        createLoggerModule(config),
-        createCacheModule(config),
-        RedisHealthModule,
-        createMongooseModule(config),
-    ];
-}
-
-export function createSharedModules(config: GeexConfig) {
-    return [
-        PassportModule.register({ defaultStrategy: 'local' }),
-        JwtModule.register({
-            secret: config.jwt?.secret ?? "secretKey", // replace with your own secret key  
-            signOptions: { expiresIn: '60m', ...config.jwt?.signOptions },
-            verifyOptions: {
-                ignoreExpiration: true,
-            },
-        }),
-    ];
-}
+export const RootModules = [
+  HttpModule,
+  TerminusModule,
+  GeexLoggerModule,
+  GeexCacheModule,
+  RedisHealthModule,
+  GeexTypegooseModule,
+];
+export const SharedModules = [
+  GeexPassportModule,
+  GeexJwtModule,
+];

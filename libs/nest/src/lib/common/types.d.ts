@@ -1,4 +1,4 @@
-declare type UserProfile = {
+export declare type UserProfile = {
     sub: string;
     id: number;
     username: string;
@@ -6,4 +6,4 @@ declare type UserProfile = {
     exp: number;
 };
 
-declare type Editable<T> = { -readonly [K in keyof T]: T[K] }; 
+export declare type Editable<T> = { -readonly [K in keyof T]: T[K] }; 

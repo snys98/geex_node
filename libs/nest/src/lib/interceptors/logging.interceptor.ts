@@ -16,7 +16,7 @@ export class LoggingInterceptor implements NestInterceptor {
     if (request) {
       const { headers, body } = request;
 
-      this._logger.info({
+      this._logger.info("Request Started.",{
         headers,
         body: this.formatMessage(body),
       });
@@ -27,7 +27,7 @@ export class LoggingInterceptor implements NestInterceptor {
       .pipe(
         tap((data) =>
           logResponse === 'true'
-            ? this._logger.info({
+            ? this._logger.info("Request Ended.",{
               body: this.formatMessage(data),
               time: `${Date.now() - now}ms`,
             })
