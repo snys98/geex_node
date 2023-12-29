@@ -17,29 +17,6 @@
         "problemMatcher": []
       },
       {
-        "label": "dev reverse proxy",
-        "command": "pwsh .\\dev_proxy.ps1",
-        "type": "shell",
-        "runOptions": {
-          "instanceLimit": 1
-        },
-        "presentation": {
-          "reveal": "always"
-        },
-        "group": "none",
-        "problemMatcher": []
-      },
-      {
-        "label": "full dev setup",
-        "command": "pwsh .\\start_containers.ps1",
-        "type": "shell",
-        "presentation": {
-          "reveal": "always"
-        },
-        "group": "none",
-        "problemMatcher": []
-      },
-      {
         "label": "build and compose all",
         "command": "docker-compose up -d ${input:build}",
         "type": "shell",
@@ -59,19 +36,19 @@
         "group": "test",
         "problemMatcher": []
       },
-      {
-        "label": "migrate up",
-        "type": "shell",
-        "command": "npx",
-        "args": [
-          "migrate",
-          "up"
-        ],
-        "options": {
-          "cwd": "${workspaceFolder:apps/api}"
-        },
-        "problemMatcher": []
-      }
+      // {
+      //   "label": "migrate up",
+      //   "type": "shell",
+      //   "command": "npx",
+      //   "args": [
+      //     "migrate",
+      //     "up"
+      //   ],
+      //   "options": {
+      //     "cwd": "${workspaceFolder:apps/api}"
+      //   },
+      //   "problemMatcher": []
+      // }
     ],
     "inputs": [
       {

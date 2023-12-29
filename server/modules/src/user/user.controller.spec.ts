@@ -1,46 +1,48 @@
-// FILEPATH: /w:/workspace/geexbox/geex-node/server/modules/src/user/user.controller.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
+import { ReturnModelType } from '@typegoose/typegoose';
 import { UserController } from './user.controller';
 import { UserClass } from './user.model';
-import * as request from 'supertest';
-import { INestApplication } from '@nestjs/common';
-import { ReturnModelType } from '@typegoose/typegoose';
 import { getModelToken } from '@geexbox/nestjs-typegoose';
 import { mockData } from '../../test/mocks/data.mock';
-import { JwtStrategy } from '../auth';
-import { UserModule } from './user.module';
-import { GeexConfig } from '@geex/nest';
 
 describe('UserController', () => {
-  let app: INestApplication;
+  let controller: UserController;
   let userModel: ReturnModelType<typeof UserClass>;
 
   beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [UserModule],
-      // controllers: [UserController],
+    const userModelToken = getModelToken(UserClass.name);
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [UserController],
       providers: [
-        GeexConfig
+        {
+          provide: userModelToken,
+          useValue: {
+            find: jest.fn().mockReturnValue({
+              exec: jest.fn().mockResolvedValue(Object.values(mockData.users)),
+            }),
+          },
+        },
       ],
     }).compile();
 
-    app = moduleRef.createNestApplication();
-    await app.init();
-
-    userModel = moduleRef.get<ReturnModelType<typeof UserClass>>(getModelToken(UserClass.name));
+    controller = module.get<UserController>(UserController);
+    userModel = module.get<ReturnModelType<typeof UserClass>>(userModelToken);
   });
 
-  it('/GET users', () => {
-    return request(app.getHttpServer())
-      .get('/users')
-      .set('Authorization', 'Bearer token')
-      .expect(200)
-      .then((response) => {
-        expect(response.body).toMatchObject(Object.values(mockData.users));
-      });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
   });
 
-  afterEach(async () => {
-    await app?.close();
+  describe('getUsers', () => {
+    it('should return an array of users', async () => {
+      const users = await controller.getUsers();
+      expect(users).toEqual(Object.values(mockData.users));
+    });
+
+    it('should call the logger with the correct parameters', async () => {
+      const loggerSpy = jest.spyOn(controller['logger'], 'info');
+      await controller.getUsers();
+      expect(loggerSpy).toHaveBeenCalled();
+    });
   });
-})
+});

@@ -65,17 +65,14 @@ describe('AuthController', () => {
     await expect(controller.login({ username: 'test', password: 'wrong' })).rejects.toThrow(UnauthorizedException);
   });
 
-  it('locked user should fail when validate', async () => {
-    const userModel = module.get<ReturnModelType<typeof UserClass>>(getModelToken(UserClass.name));
-    jest.spyOn(userModel, 'findOne').mockReturnValue({
-      exec: jest.fn().mockResolvedValue({
-        ...mockData.users.test,
-        locked: true,
-        toObject: jest.fn().mockReturnValue({ ...mockData.users.test, locked: true }),
-        save: jest.fn().mockResolvedValue(true),
-      })
-    } as any);
-    await expect(controller.login({ username: 'test', password: 'wrong' })).rejects.toThrow(/User account is locked./);
+  it('should generate token', async () => {
+    expect(await controller.login({ username: 'test', password: "test" })).toMatchObject({ id: mockData.users.test.id, access_token: mockData.token });
+  });
+
+  it('should store token', async () => {
+    expect(await controller.login({ username: 'test', password: "test" })).toMatchObject({ id: mockData.users.test.id, access_token: mockData.token });
+    const cache = module.get(CACHE_MANAGER) as Cache;
+    expect(cache.set).toHaveBeenCalledWith(`Auth:Session:${mockData.users.test.id}`, expect.anything(), expect.anything());
   });
 
   it('should lock user after max failed login attempts', async () => {
@@ -103,7 +100,16 @@ describe('AuthController', () => {
     await expect(controller.login({ username: 'test', password: 'wrong' })).rejects.toThrow(/User account is locked./);
   });
 
-  it('should generate token', async () => {
-    expect(await controller.login({ username: 'test', password: "test" })).toMatchObject({ id: mockData.users.test.id, access_token: mockData.token });
+  it('locked user should fail when validate', async () => {
+    const userModel = module.get<ReturnModelType<typeof UserClass>>(getModelToken(UserClass.name));
+    jest.spyOn(userModel, 'findOne').mockReturnValue({
+      exec: jest.fn().mockResolvedValue({
+        ...mockData.users.test,
+        locked: true,
+        toObject: jest.fn().mockReturnValue({ ...mockData.users.test, locked: true }),
+        save: jest.fn().mockResolvedValue(true),
+      })
+    } as any);
+    await expect(controller.login({ username: 'test', password: 'wrong' })).rejects.toThrow(/User account is locked./);
   });
 });

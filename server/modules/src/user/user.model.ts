@@ -20,8 +20,7 @@ const passwordValidator = (value: string) => validator.isStrongPassword(value, d
     toObject: { virtuals: true }
   }, options: {}
 })
-export class UserClass implements Base {
-  private readonly logger = new Logger(UserClass.name);
+export class UserClass implements Base{
   _id!: Types.ObjectId;
   id!: string;
   @prop({ required: true, unique: true, minlength: 4, maxlength: 20, index: true })
@@ -39,10 +38,7 @@ export class UserClass implements Base {
     this.password = password
   }
 
-  async lock(this: DocumentType<Hint<UserClass>>): Promise<void> {
-    this.logger?.info(`Locking user: ${this.username}`);
+  async lock(): Promise<void> {
     this.locked = true;
-    await this.save();
-    this.logger?.info(`User locked: ${this.username}`);
   }
 }

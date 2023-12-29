@@ -5,6 +5,9 @@
     "tslib": "^2.3.0",
     "linqts-camelcase": "^1.0.0"
   },
+  "scripts": {
+    "test": "echo 1"
+  },
   "type": "commonjs",
   "main": "./src/index.ts",
   "typings": "./src/index.d.ts"

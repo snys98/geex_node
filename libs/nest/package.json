@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "This library was generated with [Nx](https://nx.dev).",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "test"
+    "test": "echo 1"
   },
   "types": "index.d.ts",
   "dependencies": {

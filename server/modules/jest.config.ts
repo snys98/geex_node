@@ -1,3 +1,5 @@
+import { Config } from "jest";
+
 /* eslint-disable */
 export default {
   displayName: 'modules',
@@ -11,4 +13,4 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html', 'json'],
   coverageDirectory: '../../coverage/server/modules',
-};
+} as Config;

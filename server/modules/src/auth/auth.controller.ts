@@ -12,6 +12,5 @@ export class AuthController {
       return this.authService.signIn(user);
     };
     throw new HttpException('Invalid credentials', 400);
-
   }
 }  

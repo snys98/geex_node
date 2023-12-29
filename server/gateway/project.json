@@ -5,8 +5,10 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@nrwl/esbuild:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "target": "node",
@@ -14,7 +16,9 @@
         "outputPath": "dist/server/gateway",
         "main": "server/gateway/src/main.ts",
         "tsConfig": "server/gateway/tsconfig.app.json",
-        "assets": ["server/gateway/src/assets"],
+        "assets": [
+          "server/gateway/src/assets"
+        ],
         "webpackConfig": "server/gateway/webpack.config.js"
       },
       "configurations": {

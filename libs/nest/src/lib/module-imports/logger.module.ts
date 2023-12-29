@@ -1,10 +1,10 @@
 import objectId from 'hex-object-id';
-import * as apm from 'elastic-apm-node';
+import apm from 'elastic-apm-node';
 import {
   utilities as nestWinstonModuleUtilities,
   WinstonModule,
 } from 'nest-winston';
-import * as winston from 'winston';
+import winston from 'winston';
 import { ElasticsearchTransport } from 'winston-elasticsearch';
 
 import { ecsFormat } from '@elastic/ecs-winston-format';
@@ -12,7 +12,7 @@ import { ecsFormat } from '@elastic/ecs-winston-format';
 import { GeexConfig } from '../geex.config';
 import { LoggingInterceptor } from '../interceptors';
 import { Logger } from '../logging';
-import { Module, Logger as NestLogger } from '@nestjs/common';
+import { forwardRef, Module, Logger as NestLogger } from '@nestjs/common';
 import { transport } from 'winston';
 
 @Module({

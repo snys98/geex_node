@@ -15,7 +15,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('local'))
   @Get()
-  async getUsers(@CurrentUser() currentUser: any) {
+  async getUsers(@CurrentUser() currentUser?: any) {
     this.logger.info(this.getUsers.name, currentUser);
     const users = await this.userModel.find().exec();
     return users.map(user => user.toObject());

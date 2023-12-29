@@ -11,15 +11,13 @@ import { GeexTypegooseModule } from './typegoose.module';
 import { GeexPassportModule } from './passport.module';
 import { GeexJwtModule } from './jwt.module';
 
-export const RootModules = [
+export const SharedModules = [
+  GeexPassportModule,
+  GeexJwtModule,
   HttpModule,
   TerminusModule,
   GeexLoggerModule,
   GeexCacheModule,
   RedisHealthModule,
   GeexTypegooseModule,
-];
-export const SharedModules = [
-  GeexPassportModule,
-  GeexJwtModule,
 ];

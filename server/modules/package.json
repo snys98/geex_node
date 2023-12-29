@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx jest --config ./jest.config.ts"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
