@@ -1,0 +1,19 @@
+# step1: build the app
+FROM node:18.19.0-alpine AS builder
+RUN npm install -g pnpm
+WORKDIR /usr/src/app
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+RUN pnpm install
+COPY . .
+ARG NODE_ENV
+RUN pnpm run build:$NODE_ENV
+RUN pnpm prune --prod
+
+# step2: copy the app and run it
+FROM node:18.19.0-alpine
+RUN npm install -g serve
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/dist ./dist
+EXPOSE 4003
+CMD [ "serve", "-s", "dist", "-l", "4003" ]

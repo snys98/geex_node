@@ -1,0 +1,349 @@
+version: '3.7'
+name: xorgx
+
+services:
+  dns-server:
+    hostname: dns-server.dev.xorgx.tech
+    container_name: dns-server.dev.xorgx.tech
+    image: defreitas/dns-proxy-server:3.16.0-snapshot
+    environment:
+      MG_LOG_LEVEL: DEBUG
+      DOCKER_API_VERSION: 1.40
+      DPS_CONTAINER: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dns-server-dev-xorgx-tech.entrypoints=https"
+      - "traefik.http.routers.dns-server-dev-xorgx-tech.tls=true"
+      - "traefik.http.routers.dns-server-dev-xorgx-tech.rule=Host(`dns-server.dev.xorgx.tech`)"
+      - "traefik.http.services.dns-server-dev-xorgx-tech.loadbalancer.server.port=5380"
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "5380:5380"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      # - /var/run/docker.sock:/var/run/docker.sock
+      - ./dns/config/:/app/conf/
+    restart: unless-stopped
+    networks:
+      dev:
+        ipv4_address: ${NET_PREFIX}.255
+    dns:
+      - 127.0.0.1
+
+  # setup:
+  #   profiles:
+  #     - setup
+  #   build:
+  #     context: setup/
+  #     args:
+  #       ELASTIC_VERSION: ${ELASTIC_VERSION}
+  #   init: true
+  #   volumes:
+  #     - ./setup/entrypoint.sh:/entrypoint.sh:ro,Z
+  #     - ./setup/lib.sh:/lib.sh:ro,Z
+  #     - ./setup/roles:/roles:ro,Z
+  #   environment:
+  #     ELASTICSEARCH_HOST: elasticsearch.dev.xorgx.tech
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+  #     LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #     METRICBEAT_INTERNAL_PASSWORD: ${METRICBEAT_INTERNAL_PASSWORD:-}
+  #     FILEBEAT_INTERNAL_PASSWORD: ${FILEBEAT_INTERNAL_PASSWORD:-}
+  #     HEARTBEAT_INTERNAL_PASSWORD: ${HEARTBEAT_INTERNAL_PASSWORD:-}
+  #     MONITORING_INTERNAL_PASSWORD: ${MONITORING_INTERNAL_PASSWORD:-}
+  #     BEATS_SYSTEM_PASSWORD: ${BEATS_SYSTEM_PASSWORD:-}
+  #   networks:
+  #     - dev
+  #   depends_on:
+  #     - elasticsearch
+
+  # elasticsearch:
+  #   hostname: elasticsearch.dev.xorgx.tech
+  #   container_name: elasticsearch.dev.xorgx.tech
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.elasticsearch-dev-xorgx-tech.entrypoints=https"
+  #     - "traefik.http.routers.elasticsearch-dev-xorgx-tech.tls=true"
+  #     - "traefik.http.routers.elasticsearch-dev-xorgx-tech.rule=Host(`elasticsearch.dev.xorgx.tech`)"
+  #     - "traefik.http.services.elasticsearch-dev-xorgx-tech.loadbalancer.server.port=9200"
+  #   build:
+  #     context: elasticsearch/
+  #     args:
+  #       ELASTIC_VERSION: ${ELASTIC_VERSION}
+  #   volumes:
+  #     - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
+  #     - elasticsearch:/usr/share/elasticsearch/data:Z
+  #   ports:
+  #     - 9200:9200
+  #     - 9300:9300
+  #   environment:
+  #     node.name: elasticsearch
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     # Bootstrap password.
+  #     # Used to initialize the keystore during the initial startup of
+  #     # Elasticsearch. Ignored on subsequent runs.
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+  #     # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+  #     # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+  #     discovery.type: single-node
+  #   networks:
+  #     dev:
+  #   restart: unless-stopped
+
+  # logstash:
+  #   hostname: logstash.dev.xorgx.tech
+  #   container_name: logstash.dev.xorgx.tech
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.logstash-dev-xorgx-tech.entrypoints=https"
+  #     - "traefik.http.routers.logstash-dev-xorgx-tech.tls=true"
+  #     - "traefik.http.routers.logstash-dev-xorgx-tech.rule=Host(`logstash.dev.xorgx.tech`)"
+  #     - "traefik.http.services.logstash-dev-xorgx-tech.loadbalancer.server.port=9600"
+  #   build:
+  #     context: logstash/
+  #     args:
+  #       ELASTIC_VERSION: ${ELASTIC_VERSION}
+  #   volumes:
+  #     - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+  #     - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+  #   ports:
+  #     - 5044:5044
+  #     - 50000:50000/tcp
+  #     - 50000:50000/udp
+  #     - 9600:9600
+  #   environment:
+  #     LS_JAVA_OPTS: -Xms256m -Xmx256m
+  #     LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+  #   networks:
+  #     dev:
+  #   depends_on:
+  #     - elasticsearch
+  #   restart: unless-stopped
+
+  # kibana:
+  #   hostname: kibana.dev.xorgx.tech
+  #   container_name: kibana.dev.xorgx.tech
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.kibana-dev-xorgx-tech.entrypoints=https"
+  #     - "traefik.http.routers.kibana-dev-xorgx-tech.tls=true"
+  #     - "traefik.http.routers.kibana-dev-xorgx-tech.rule=Host(`kibana.dev.xorgx.tech`)"
+  #     - "traefik.http.services.kibana-dev-xorgx-tech.loadbalancer.server.port=5601"
+  #   build:
+  #     context: kibana/
+  #     args:
+  #       ELASTIC_VERSION: ${ELASTIC_VERSION}
+  #   volumes:
+  #     - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+  #   ports:
+  #     - 5601:5601
+  #   environment:
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   networks:
+  #     dev:
+  #   depends_on:
+  #     - elasticsearch
+  #   restart: unless-stopped
+
+  # apm-server:
+  #   hostname: apm-server.dev.xorgx.tech
+  #   container_name: apm-server.dev.xorgx.tech
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.apm-server-dev-xorgx-tech.entrypoints=https"
+  #     - "traefik.http.routers.apm-server-dev-xorgx-tech.tls=true"
+  #     - "traefik.http.routers.apm-server-dev-xorgx-tech.rule=Host(`apm-server.dev.xorgx.tech`)"
+  #     - "traefik.http.services.apm-server-dev-xorgx-tech.loadbalancer.server.port=8200"
+  #   build:
+  #     context: apm-server/
+  #     args:
+  #       ELASTIC_VERSION: ${ELASTIC_VERSION}
+  #   environment:
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #   volumes:
+  #     - ./apm-server/config/apm-server.yml:/usr/share/apm-server/apm-server.yml
+  #   ports:
+  #     - "8200:8200"
+  #   networks:
+  #     dev:
+  #   depends_on:
+  #     - elasticsearch
+  #   restart: unless-stopped
+
+  redis:
+    hostname: redis.dev.xorgx.tech
+    container_name: redis.dev.xorgx.tech
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.redis-dev-xorgx-tech.entrypoints=https"
+      - "traefik.http.routers.redis-dev-xorgx-tech.tls=true"
+      - "traefik.http.routers.redis-dev-xorgx-tech.rule=Host(`redis.dev.xorgx.tech`)"
+      - "traefik.http.services.redis-dev-xorgx-tech.loadbalancer.server.port=6379"
+    image: redis:7.2.4-alpine3.19
+    ports:
+      - "6379:6379/udp"
+      - "6379:6379/tcp"
+    networks:
+      dev:
+    restart: unless-stopped
+
+  mongo:
+    hostname: mongo.dev.xorgx.tech
+    container_name: mongo.dev.xorgx.tech
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mongo-dev-xorgx-tech.entrypoints=https"
+      - "traefik.http.routers.mongo-dev-xorgx-tech.tls=true"
+      - "traefik.http.routers.mongo-dev-xorgx-tech.rule=Host(`mongo.dev.xorgx.tech`)"
+      - "traefik.http.services.mongo-dev-xorgx-tech.loadbalancer.server.port=27017"
+    image: mongo:5.0.17
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    networks:
+      dev:
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    restart: unless-stopped
+    volumes:
+      - ./mongo/config/mongod.conf:/etc/mongod.conf
+
+  # rabbitmq:
+  #   hostname: rabbitmq.dev.xorgx.tech
+  #   container_name: rabbitmq.dev.xorgx.tech
+  #   environment:
+  #   - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+  #   - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.rabbitmq-dev-xorgx-tech.entrypoints=https"
+  #     - "traefik.http.routers.rabbitmq-dev-xorgx-tech.tls=true"
+  #     - "traefik.http.routers.rabbitmq-dev-xorgx-tech.rule=Host(`rabbitmq.dev.xorgx.tech`)"
+  #     - "traefik.http.services.rabbitmq-dev-xorgx-tech.loadbalancer.server.port=15672"
+  #   image: rabbitmq:3.12-management
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     dev:
+  #   restart: unless-stopped
+  #   configs:
+  #     - source: plugins
+  #       target: /etc/rabbitmq/enabled_plugins  
+
+  traefik:
+    hostname: traefik.dev.xorgx.tech
+    container_name: traefik.dev.xorgx.tech
+    image: traefik:v3.0
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    command:
+      - "--global.sendanonymoususage=false"
+      - "--global.checknewversion=false"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--api.debug=true"
+      # - "--ping=true"
+      - "--log.level=DEBUG"
+      - "--log.format=common"
+      - "--accesslog=true"
+      - "--serversTransport.insecureSkipVerify=true"
+      - "--serversTransport.rootCAs=/certs/dev.geex.tech.pem"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+      - "--entrypoints.http.http.redirections.entryPoint.to=https"
+      - "--entrypoints.http.http.redirections.entrypoint.permanent=true"
+      # - "--entrypoints.http.http.middlewares=httpsRedirect"
+      - "--entrypoints.https.http.middlewares=compress@file"
+      - "--providers.docker.watch=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.allowEmptyServices=true"
+      - "--providers.docker.useBindPortIP=false"
+      - "--providers.docker.endpoint=tcp://dockersocketproxy:2375"
+      - "--providers.docker.network=dev"
+      - "--providers.file.watch=true"
+      - "--providers.file.directory=/etc/traefik"
+      - "--providers.file.debugloggeneratedtemplate=true"
+    networks:
+      - dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dev"
+
+      # - "traefik.http.middlewares.gzip.compress=true"
+
+      - "traefik.http.routers.traefik-dashboard-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-dashboard-secure.tls=true"
+      - "traefik.http.routers.traefik-dashboard-secure.rule=Host(`traefik.dev.xorgx.tech`)"
+      - "traefik.http.routers.traefik-dashboard-secure.service=dashboard@internal"
+      # - "traefik.http.routers.traefik-dashboard-secure.middlewares=auth"
+      # - "traefik.http.middlewares.auth.basicauth.users=admin:${TRAEFIK_PASSWORD}"
+
+      - "traefik.http.routers.traefik-dashboard-api-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-dashboard-api-secure.tls=true"
+      - "traefik.http.routers.traefik-dashboard-api-secure.rule=Host(`traefik.dev.xorgx.tech`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.traefik-dashboard-api-secure.service=api@internal"
+    volumes:
+      - ./certs/:/certs/:ro
+      - ./traefik/:/etc/traefik/:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy off localhost:8080/ping || exit 1"]
+      interval: 5s
+      retries: 10
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+    depends_on:
+      - dockersocketproxy
+
+  dockersocketproxy:
+    image: tecnativa/docker-socket-proxy
+    networks:
+      - dev
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      CONTAINERS: 1
+    restart: unless-stopped
+
+  update-cert:
+    profiles:
+      - "update-cert"
+    build: 
+      context: "./certs"
+    environment:
+      - DOMAIN=${DOMAIN_NAME}
+      - CERT_PASSWORD=${CERT_PASSWORD}
+    volumes:
+      - ./certs:/certs
+    networks:
+      - dev
+
+networks:
+  dev:
+    name: dev
+    attachable: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NET_PREFIX}.0/16
+          gateway: ${NET_PREFIX}.1
+
+volumes:
+  # elasticsearch:
+  mongo:
+
+# configs:
+#   plugins:
+#     content: "[rabbitmq_shovel, rabbitmq_shovel_management]."

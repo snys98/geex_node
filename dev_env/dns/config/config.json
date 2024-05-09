@@ -1,0 +1,172 @@
+{
+  "activeEnv": "local",
+  "defaultDns": null,
+  "dnsServerPort": 0,
+  "dockerHost": null,
+  "domain": "",
+  "dpsNetwork": true,
+  "dpsNetworkAutoConnect": true,
+  "envs": [
+    {
+      "name": "local",
+      "hostnames": [
+        {
+          "id": 0,
+          "hostname": "host.docker.internal",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 1,
+          "hostname": "dns-server.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 2,
+          "hostname": "elasticsearch.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 3,
+          "hostname": "logstash.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 4,
+          "hostname": "kibana.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 5,
+          "hostname": "apm-server.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 6,
+          "hostname": "redis.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 7,
+          "hostname": "mongo.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 8,
+          "hostname": "rabbitmq.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 9,
+          "hostname": "traefik.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 10,
+          "hostname": "api.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "type": "A",
+          "hostname": "admin.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "ttl": 10,
+          "id": 11,
+          "target": "acme.com"
+        },
+        {
+          "type": "A",
+          "hostname": "desktop.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "ttl": 10,
+          "id": 12,
+          "target": "acme.com"
+        },
+        {
+          "type": "A",
+          "hostname": "docs.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "ttl": 10,
+          "id": 13,
+          "target": "acme.com"
+        },
+        {
+          "type": "A",
+          "hostname": "identity.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "ttl": 10,
+          "id": 13,
+          "target": "acme.com"
+        }
+      ]
+    },
+    {
+      "name": "dev",
+      "hostnames": [
+        {
+          "id": 10000,
+          "hostname": "host.docker.internal",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        },
+        {
+          "id": 10001,
+          "hostname": "dns-server.dev.xorgx.tech",
+          "ip": "127.0.0.1",
+          "target": "acme.com",
+          "ttl": 10,
+          "type": "A"
+        }
+      ]
+    }
+  ],
+  "hostMachineHostname": "host.docker",
+  "logFile": "",
+  "logLevel": "",
+  "noEntriesResponseCode": null,
+  "noRemoteServers": null,
+  "registerContainerNames": null,
+  "remoteDnsServers": [
+    "8.8.8.8",
+    "1.1.1.1",
+    "223.5.5.5"
+  ],
+  "resolvConfOverrideNameServers": null,
+  "serverProtocol": null,
+  "version": 2,
+  "webServerPort": 0
+}

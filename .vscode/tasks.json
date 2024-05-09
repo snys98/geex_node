@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "init workspace",
+      "detail": "init workspace, instal dev cert and dependencies",
+      "command": "pwsh ./init_workspace.ps1",
+      "type": "shell",
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiMagenta"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "none",
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "problemMatcher": []
+    },
+  ],
+}

@@ -1,0 +1,33 @@
+version: '3.7'
+
+name: xorgx
+
+services:
+  docs:
+    hostname: docs.dev.xorgx.tech
+    container_name: docs.dev.xorgx.tech
+    profiles:
+      - "client/docs"
+    image: xorgx/docs:latest
+    env_file:
+      - .env.development
+    # volumes:
+    #   - ../../dev_env/certs:/app/certs:ro
+    build: 
+      context: "."
+      args:
+        - NODE_ENV=development
+    ports:
+      - 4002:4002
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 4002 || exit 1"]
+      interval: 10s  
+      timeout: 5s  
+      retries: 3  
+    networks:
+      - net
+    
+networks:
+  net:
+    name: dev
+    external: true

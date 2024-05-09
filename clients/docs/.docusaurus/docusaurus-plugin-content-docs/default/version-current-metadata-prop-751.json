@@ -1,0 +1,29 @@
+{
+  "pluginId": "default",
+  "version": "current",
+  "label": "Next",
+  "banner": null,
+  "badge": false,
+  "noIndex": false,
+  "className": "docs-version-current",
+  "isLast": true,
+  "docsSidebars": {
+    "tutorialSidebar": [
+      {
+        "type": "link",
+        "label": "Geex Doc",
+        "href": "/docs/intro",
+        "docId": "intro",
+        "unlisted": false
+      }
+    ]
+  },
+  "docs": {
+    "intro": {
+      "id": "intro",
+      "title": "Geex Doc",
+      "description": "please place doc files in the the same directory as current file",
+      "sidebar": "tutorialSidebar"
+    }
+  }
+}

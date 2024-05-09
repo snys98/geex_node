@@ -1,0 +1,35 @@
+version: '3.7'
+
+name: xorgx
+
+services:
+  desktop-dev-xorgx-tech:
+    hostname: desktop.dev.xorgx.tech
+    container_name: desktop.dev.xorgx.tech
+    image: xorgx/desktop:latest
+    # entrypoint: ["node", "main.js"]
+    env_file:
+      - .env.development
+    # volumes:
+    #   - ../../../dev_env/certs:/app/certs:ro
+    build: 
+      context: "."
+      args:
+        - NODE_ENV=development
+    ports:
+      - 4003:4003
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 4003 || exit 1"]
+      interval: 10s  
+      timeout: 5s  
+      retries: 3  
+    networks:
+      - net
+    # depends_on:
+    #   - mongo
+    #   - redis
+
+networks:
+  net:
+    name: dev
+    external: true

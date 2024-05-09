@@ -1,0 +1,10 @@
+version: '3.7'
+
+name: xorgx
+
+include:
+  - path: "./dev_env/docker-compose.yml"
+  - path: "./server/api/docker-compose.yml"
+  - path: "./server/modules/identity/docker-compose.yml"
+  - path: "./clients/desktop/docker-compose.yml"
+  - path: "./clients/docs/docker-compose.yml"

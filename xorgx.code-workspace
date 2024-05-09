@@ -1,0 +1,57 @@
+{
+  "extensions": {
+    "recommendations": [
+      "nguyenngoclong.terminal-keeper",
+      "in4margaret.compareit"
+    ]
+  },
+  "folders": [
+    {
+      "name": "✨ xorgx ✨",
+      "path": "."
+    },
+    {
+      "name": "server/api",
+      "path": "server/api"
+    },
+    {
+      "name": "server/modules/identity",
+      "path": "server/modules/identity"
+    },
+    {
+      "name": "server/modules/libs",
+      "path": "server/modules/libs"
+    },
+    // {
+    //   "path": "clients/docs",
+    //   "name": "clients/docs"
+    // },
+    {
+      "path": "clients/desktop",
+      "name": "clients/desktop"
+    }
+  ],
+  "geex": {
+    "orgName": "xorgx"
+  },
+  "settings": {
+    "jest.disabledWorkspaceFolders": [
+      "✨ xorgx ✨",
+      "server/api",
+      "server/modules/libs",
+      "clients/docs",
+      "clients/desktop",
+    ],
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#085bae",
+      "titleBar.activeBackground": "#085bae",
+      "titleBar.activeForeground": "#FFFBFD"
+    },
+    "cSpell.enableFiletypes": [
+      "*"
+    ],
+    "vsicons.presets.nestjs": true,
+    "restoreTerminals.runOnStartup": true,
+    "restoreTerminals.keepExistingTerminalsOpen": true
+  }
+}
