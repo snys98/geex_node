@@ -41,7 +41,7 @@ The project is structured as follows:
         - `src`: The source code of the identity microservice.
           - `auth`: The authentication module.
           - `user`: The user module.
-          - `common`: The common module.
+          - `shared`: The share components like dtos and inputs and etc..
           - `app.module.ts`: The main module of the identity microservice.
           - `app.config.ts`: The configuration file of the identity microservice.
           - `app.permissions.ts`: The permissions setup file of the identity microservice.
