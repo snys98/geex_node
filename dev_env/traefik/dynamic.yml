@@ -57,23 +57,23 @@ http:
     api:
       loadBalancer:
         servers:
-        - url: https://api.dev.xorgx.tech:3000
+        - url: https://docker.host.internal:3000
     identity:
       loadBalancer:
         servers:
-        - url: https://identity.dev.xorgx.tech:3001
+        - url: https://docker.host.internal:3001
     admin:
       loadBalancer:
         servers:
-        - url: https://admin.dev.xorgx.tech:4001
+        - url: https://docker.host.internal:4001
     docs:
       loadBalancer:
         servers:
-        - url: https://docs.dev.xorgx.tech:4002
+        - url: https://docker.host.internal:4002
     desktop:
       loadBalancer:
         servers:
-        - url: http://desktop.dev.xorgx.tech:4003
+        - url: http://docker.host.internal:4003
 tls:
   certificates:
   - certFile: /certs/dev.xorgx.tech.crt
