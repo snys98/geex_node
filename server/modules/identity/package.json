@@ -2,7 +2,8 @@
   "name": "@xorgx/identity",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "nest build",
     "build:lib": "nest build -p tsconfig.lib.json",
@@ -16,7 +17,6 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest  --runInBand",
-    "test:integration": "jest --config ./test/integration/jest.config.integration.ts",
     "migrate:up": "npx migrate up",
     "migrate:up:development": "npx migrate up -f migrate.development"
   },
