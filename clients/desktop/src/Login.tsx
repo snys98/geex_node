@@ -40,7 +40,7 @@ const Login = () => {
         setAccessToken(token);
       }
       else {
-        throw new Error(response.errors?.at(0)?.message || "Login failed.");
+        throw new Error(response.errors![0]!.message || 'Login failed.');
       }
 
     } catch (error) {
