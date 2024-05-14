@@ -9,6 +9,14 @@ services:
     profiles:
       - "client/docs"
     image: xorgx/docs:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.docs-dev-xorgx-tech.service=docs-dev-xorgx-tech"
+      - "traefik.http.routers.docs-dev-xorgx-tech.entrypoints=https"
+      - "traefik.http.routers.docs-dev-xorgx-tech.tls=true"
+      - "traefik.http.routers.docs-dev-xorgx-tech.rule=Host(`docs.dev.xorgx.tech`)"
+      - "traefik.http.services.docs-dev-xorgx-tech.loadbalancer.server.port=4003"
+      - "traefik.http.services.docs-dev-xorgx-tech.loadbalancer.server.scheme=https"
     env_file:
       - .env.development
     # volumes:

@@ -8,6 +8,14 @@ services:
     container_name: identity.dev.xorgx.tech
     image: xorgx/identity:latest
     entrypoint: ["node", "main.js"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.identity-dev-xorgx-tech.service=identity-dev-xorgx-tech"
+      - "traefik.http.routers.identity-dev-xorgx-tech.entrypoints=https"
+      - "traefik.http.routers.identity-dev-xorgx-tech.tls=true"
+      - "traefik.http.routers.identity-dev-xorgx-tech.rule=Host(`identity.dev.xorgx.tech`)"
+      - "traefik.http.services.identity-dev-xorgx-tech.loadbalancer.server.port=3001"
+      - "traefik.http.services.identity-dev-xorgx-tech.loadbalancer.server.scheme=https"
     env_file:
       - .env.development
     volumes:

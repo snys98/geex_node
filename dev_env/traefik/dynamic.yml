@@ -1,35 +1,25 @@
+tls:
+  certificates:
+  - certFile: /certs/dev.xorgx.tech.crt
+    keyFile: /certs/dev.xorgx.tech.key
+  options:
+    default:
+      cipherSuites:
+      - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+      - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+      sniStrict: false
+      minVersion: VersionTLS11
+      maxVersion: VersionTLS13
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/dev.xorgx.tech.crt
+        keyFile: /certs/dev.xorgx.tech.key
 http:
-  routers:
-    api:
-      service: api
-      entryPoints:
-      - https
-      tls: {}
-      rule: Host(`api.dev.xorgx.tech`)
-    identity:
-      service: identity
-      entryPoints:
-      - https
-      tls: {}
-      rule: Host(`identity.dev.xorgx.tech`)
-    admin:
-      service: admin
-      entryPoints:
-      - https
-      tls: {}
-      rule: Host(`admin.dev.xorgx.tech`)
-    docs:
-      service: docs
-      entryPoints:
-      - https
-      tls: {}
-      rule: Host(`docs.dev.xorgx.tech`)
-    desktop:
-      service: desktop
-      entryPoints:
-      - https
-      tls: {}
-      rule: Host(`desktop.dev.xorgx.tech`)
   middlewares:
     compress:
       compress:
@@ -53,45 +43,3 @@ http:
         - application/gzip
         - application/x-rar-compressed
         - application/octet-stream
-    services:
-    api:
-      loadBalancer:
-        servers:
-          - url: https://api.dev.xorgx.tech:3000
-    identity:
-      loadBalancer:
-        servers:
-          - url: https://identity.dev.xorgx.tech:3001
-    admin:
-      loadBalancer:
-        servers:
-          - url: https://admin.dev.xorgx.tech:4001
-    docs:
-      loadBalancer:
-        servers:
-          - url: https://docs.dev.xorgx.tech:4002
-    desktop:
-      loadBalancer:
-        servers:
-          - url: http://desktop.dev.xorgx.tech:4003
-tls:
-  certificates:
-  - certFile: /certs/dev.xorgx.tech.crt
-    keyFile: /certs/dev.xorgx.tech.key
-  options:
-    default:
-      cipherSuites:
-      - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-      - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
-      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-      - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
-      - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-      sniStrict: false
-      minVersion: VersionTLS11
-      maxVersion: VersionTLS13
-  stores:
-    default:
-      defaultCertificate:
-        certFile: /certs/dev.xorgx.tech.crt
-        keyFile: /certs/dev.xorgx.tech.key
