@@ -143,13 +143,13 @@ if ($cert_type -eq "1") {
 #endregion
 
 # get all .ps1 files in the templates folder
-$scripts = Get-ChildItem -Path "./dev_env/templates/" -Filter "*.ps1"
+# $scripts = Get-ChildItem -Path "./dev_env/templates/" -Filter "*.ps1"
 
-# iterate over all .ps1 files
-foreach ($script in $scripts) {
-    # create a new PowerShell instance and execute the script
-    Start-Process "pwsh" -ArgumentList "-ExecutionPolicy Bypass -File `"$($script.FullName)`""
-}
+# # iterate over all .ps1 files
+# foreach ($script in $scripts) {
+#     # create a new PowerShell instance and execute the script
+#     Start-Process "pwsh" -ArgumentList "-ExecutionPolicy Bypass -File `"$($script.FullName)`""
+# }
 
 # docker-compose up setup -d --build
 if ($cert_type -eq "2") {
