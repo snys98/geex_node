@@ -1,5 +1,4 @@
-import { createContext } from "react";
-
+import { createContext } from 'react';
 
 export type AuthContext = {
   accessToken?: string;
@@ -11,3 +10,5 @@ export const AuthContext = createContext<AuthContext>({
     this.accessToken = token;
   },
 });
+
+export const AuthProvider = AuthContext.Provider;

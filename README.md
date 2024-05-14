@@ -79,9 +79,11 @@ Prerequisites(with setup automation script for windows platform):
 .\init_workspace.ps1
 ```
 
-2. run `pnpm migrate:up:development` at `./server/modules/identity` to migrate seed data to container mongodb.
+> you can also check the script content and run the commands manually if you're familiar with whole the process.
 
-3. open browser and access the frontend at [https://desktop.dev.xorgx.tech](https://desktop.dev.xorgx.tech) and the backend at [https://api.dev.xorgx.tech](https://api.dev.xorgx.tech/graphql).
+1. run `pnpm migrate:up:development` at `./server/modules/identity` to migrate seed data to container mongodb.
+
+2. open browser and access the frontend at [https://desktop.dev.xorgx.tech](https://desktop.dev.xorgx.tech) and the backend at [https://api.dev.xorgx.tech](https://api.dev.xorgx.tech/graphql).
 
 > Note: This project will setup a fresh local dev environment with all the dependencies running in docker containers, these dependencies may conflict with your local environment if you already have some of the dependencies installed.
 

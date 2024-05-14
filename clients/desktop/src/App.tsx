@@ -1,10 +1,17 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Login from './Login'
-import Users from './Users'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from './providers/AuthContext'
+import './App.css';
+
+import {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
+import viteLogo from '/vite.svg';
+
+import reactLogo from './assets/react.svg';
+import Login from './Login';
+import { AuthContext } from './providers/auth.provider';
+import Users from './Users';
 
 function App() {
   const { accessToken } = useContext(AuthContext)

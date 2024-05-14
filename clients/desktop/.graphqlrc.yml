@@ -1,19 +1,20 @@
 overwrite: true
 schema:
-  - http://api.dev.challenge.io/graphql
+  - ./src/proxy/schema.graphql
+  - http://localhost:3001/graphql/
+  # - https://api.dev.xorgx.tech/graphql/
 # extensions:
 #   endpoints:
 #     default:
-#       url: "https://api.dev.challenge.io/graphql"
+#       url: "https://fms.api.dev.kufosoft.com/graphql"
 #       headers:
 #         Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJsb2dpbl9wcm92aWRlciI6IlRydXN0ZWQifQ.MLw-_WPkvIsTI_QICxR8tiOJhGRSGWI3bVNoXUm1Fhw
 documents:
   - "./src/**/*.graphql"
   - "!./src/**/*.test.graphql"
   - "!./src/**/test.graphql"
-exclude: "./geex-schematics/**/*"
 generates:
-  ./src/proxies/api/type.ts:
+  ./src/proxy/.generated/type.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -30,7 +31,7 @@ generates:
         ObjectId: "string"
       documentVariableSuffix: "Gql"
       fragmentVariableSuffix: "Gql"
-  ./src/proxies/api/apollo-helpers.ts:
+  ./src/proxy/.generated/apollo-helpers.ts:
     plugins:
       - typescript-apollo-client-helpers
 config:

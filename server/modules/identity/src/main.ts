@@ -1,8 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { AppModule } from './app.module';
 import * as fs from 'fs';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+
 import { NestApplicationOptions } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   // todo: move env specific code to a separate build process
