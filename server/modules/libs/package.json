@@ -1,6 +1,6 @@
 {
   "name": "xorgx-libs",
-  "version": "1.0.10",
+  "version": "1.0.9",
   "description": "",
   "type": "commonjs",
   "main": "dist/index.js",
